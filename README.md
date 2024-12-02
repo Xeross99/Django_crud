@@ -1,12 +1,16 @@
-# django_crud
+# Django - CRUD
 
+Activate the virtual environment (venv)
+```
+. .venv/bin/activate
+```
 
-Włączenie servera
+Start the development server
 ```
 python manage.py runserver
 ```
 
-Włączenie watchera tailwindcss
+Start the Tailwind CSS watcher
 ```
 python manage.py tailwind start
 ```
