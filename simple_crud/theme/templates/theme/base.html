@@ -58,5 +58,12 @@
 			</main>
 		</div>
 		{% include 'theme/footer.html' %}
+
+		<script>
+      const element = document.getElementById('notification');
+      element.addEventListener('animationend', () => {
+        element.remove();
+      });
+    </script>
 	</body>
 </html>
