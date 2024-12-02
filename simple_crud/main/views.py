@@ -30,6 +30,5 @@ def create_product(request):
             messages.success(request, 'Produkt został pomyślnie utworzony!')
             return redirect('wszystkie_produkty')
         else:
-            messages.error(request, 'Nie udało się utworzyć produktu. Sprawdź, czy nazwa i cena są wypełnione.')
-
+            messages.error(request, 'Nie udało się utworzyć produktu. Sprawdź, czy wszystkie dane są wypełnione.')
     return render(request, 'main/new.html')
