@@ -6,7 +6,7 @@ def index(request):
     return render(request, 'main/dashboard.html')
 
 def products(request):
-    produkty = Produkt.objects.all()
+    produkty = Produkt.objects.all().order_by('-data_dodania')
     return render(request, 'main/index.html', {'produkty': produkty})
 
 def product_id(request, product_id):

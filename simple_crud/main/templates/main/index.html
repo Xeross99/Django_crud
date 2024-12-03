@@ -9,28 +9,42 @@
 {% endblock %}
 
 {% block content %}
+<a href={% url 'product_new_path' %} class="group w-fit flex flex-row items-center justify-center rounded-full bg-blue-600 p-2 text-white shadow-sm
+hover:bg-blue-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600 transition-all duration-300">
+<svg class="size-5" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" data-slot="icon">
+  <path d="M10.75 4.75a.75.75 0 0 0-1.5 0v4.5h-4.5a.75.75 0 0 0 0 1.5h4.5v4.5a.75.75 0 0 0 1.5 0v-4.5h4.5a.75.75 0 0 0 0-1.5h-4.5v-4.5Z" />
+</svg>
+  <div class="flex items-center ml-2 transition-all duration-300 group-hover:w-28 w-0 -mr-2 overflow-hidden">
+    <span class="opacity-0 scale-90 group-hover:opacity-100 group-hover:scale-100 transition-transform duration-300 text-sm whitespace-nowrap">
+      Dodaj produkt
+    </span>
+  </div>
+</a>
   <div class="bg-white">
     <div class="mx-auto max-w-2xl px-4 sm:px-6 lg:max-w-7xl lg:px-8">
 
       {% if produkty %}
-        <div class="mt-6 grid grid-cols-2 gap-x-4 gap-y-10 sm:gap-x-6 md:grid-cols-4 md:gap-y-0 lg:gap-x-8">
+        <div class="mt-6 grid grid-cols-1 gap-x-4 gap-y-10 sm:gap-x-6 md:grid-cols-4 md:gap-y-0 lg:gap-x-8">
           {% for produkt in produkty %}
-            <div class="group relative">
-              <div class="h-56 w-full overflow-hidden rounded-md bg-gray-200 group-hover:opacity-75 lg:h-72 xl:h-80">
-                <img src="https://tailwindui.com/plus/img/ecommerce-images/home-page-04-trending-product-02.jpg" 
-                     alt="{{ produkt.nazwa }}" 
-                     class="size-full object-cover">
-              </div>
-              <h3 class="mt-4 text-sm text-gray-700">
-                <a href="{% url 'product_id' produkt.id %}">
-                  <span class="absolute inset-0"></span>
-                  {{ produkt.nazwa }}
-                </a>
-              </h3>
-              <p class="mt-1 text-sm text-gray-500">{{ produkt.opis|truncatechars:50 }}</p>
-              <p class="mt-1 text-sm font-medium text-gray-900">{{ produkt.cena }} PLN</p>
+          <div class="group relative {% if not produkt.dostepny %}opacity-50{% endif %} my-5">
+            <div class="h-56 w-full overflow-hidden rounded-md bg-gray-200 {% if produkt.dostepny %}group-hover:opacity-75{% endif %} lg:h-72 xl:h-80">
+              <img src="https://tailwindui.com/plus/img/ecommerce-images/home-page-04-trending-product-02.jpg" 
+                   alt="{{ produkt.nazwa }}" 
+                   class="size-full object-cover {% if not produkt.dostepny %}blur-sm{% endif %}">
+              {% if not produkt.dostepny %}
+                <p class="text-red-500 absolute top-10 font-medium text-center inset-x-0">Produkt niedostępny</p>
+              {% endif %}
             </div>
-          {% endfor %}
+            <h3 class="mt-4 text-sm text-gray-700">
+              <a href="{% url 'product_id' produkt.id %}">
+                <span class="absolute inset-0"></span>
+                {{ produkt.nazwa }}
+              </a>
+            </h3>
+            <p class="mt-1 text-sm text-gray-500">{{ produkt.opis|truncatechars:50 }}</p>
+            <p class="mt-1 text-sm font-medium text-gray-900">{{ produkt.cena }} PLN</p>
+          </div>
+        {% endfor %}
         </div>
       {% else %}
       <div class="flex flex-col lg:flex-row items-center justify-center space-y-16 lg:space-y-0 space-x-8 2xl:space-x-0">

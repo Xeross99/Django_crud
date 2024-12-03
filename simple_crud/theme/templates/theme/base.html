@@ -61,9 +61,11 @@
 
 		<script>
       const element = document.getElementById('notification');
-      element.addEventListener('animationend', () => {
-        element.remove();
-      });
+			if(element) {
+				element.addEventListener('animationend', () => {
+					element.remove();
+				});
+			}
     </script>
 	</body>
 </html>
