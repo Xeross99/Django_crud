@@ -6,6 +6,15 @@ def index(request):
     return render(request, 'main/dashboard.html')
 
 def products(request):
+    # Jeśli POST to usuń produkt w przeciwnym wypadku wykonaj GET.
+    if request.method == 'POST':
+        product_id = request.POST.get('delete_product_id')
+        if product_id:
+            produkt = get_object_or_404(Produkt, id=product_id)
+            produkt.delete()
+            messages.success(request, f'Produkt "{produkt.nazwa}" został pomyślnie usunięty!')
+            return redirect('wszystkie_produkty')
+    
     produkty = Produkt.objects.all().order_by('-data_dodania')
     return render(request, 'main/index.html', {'produkty': produkty})
 
