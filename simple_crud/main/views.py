@@ -12,7 +12,7 @@ def products(request):
             produkt = get_object_or_404(Produkt, id=product_id)
             produkt.delete()
             messages.success(request, f'Produkt "{produkt.nazwa}" został pomyślnie usunięty!')
-            return redirect('wszystkie_produkty')
+            return redirect('products_path')
     
     produkty = Produkt.objects.all().order_by('-data_dodania')
     return render(request, 'main/index.html', {'produkty': produkty})
@@ -36,7 +36,7 @@ def create_product(request):
                 dostepny=dostepny
             )
             messages.success(request, 'Produkt został pomyślnie utworzony!')
-            return redirect('wszystkie_produkty')
+            return redirect('products_path')
         else:
             messages.error(request, 'Nie udało się utworzyć produktu. Sprawdź, czy wszystkie dane są wypełnione.')
     return render(request, 'main/new.html')
@@ -57,7 +57,7 @@ def edit_product(request, product_id):
             produkt.dostepny = dostepny
             produkt.save()
             messages.success(request, f'Produkt "{produkt.nazwa}" został pomyślnie zaktualizowany!')
-            return redirect('wszystkie_produkty')
+            return redirect('products_path')
         else:
             messages.error(request, 'Nie udało się zaktualizować produktu. Sprawdź, czy wszystkie dane są wypełnione.')
     
