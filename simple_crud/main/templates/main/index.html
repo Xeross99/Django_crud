@@ -27,10 +27,8 @@
         <div class="mt-6 grid grid-cols-1 gap-x-4 gap-y-10 sm:gap-x-6 md:grid-cols-4 md:gap-y-0 lg:gap-x-8">
           {% for produkt in produkty %}
           <div class="group relative {% if not produkt.dostepny %}opacity-50{% endif %} my-5">
-            <div class="h-56 w-full overflow-hidden rounded-md bg-gray-200 {% if produkt.dostepny %}group-hover:opacity-75{% endif %} lg:h-72 xl:h-80">
-              <img src="https://tailwindui.com/plus/img/ecommerce-images/home-page-04-trending-product-02.jpg" 
-                   alt="{{ produkt.nazwa }}" 
-                   class="size-full object-cover {% if not produkt.dostepny %}blur-sm{% endif %}">
+            <div class="h-56 w-full overflow-hidden flex items-center justify-center rounded-md bg-gray-200 {% if produkt.dostepny %}group-hover:opacity-75{% endif %} lg:h-72 xl:h-80">
+              <span class="rubik-glitch-regular text-9xl text-blue-500 {% if not produkt.dostepny %}blur-sm{% endif %}">{{ produkt.nazwa|slice:":1" }}</span>
               {% if not produkt.dostepny %}
                 <p class="text-red-500 absolute top-10 font-medium text-center inset-x-0">Produkt niedostępny</p>
               {% endif %}

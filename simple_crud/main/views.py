@@ -6,7 +6,6 @@ def index(request):
     return render(request, 'main/dashboard.html')
 
 def products(request):
-    # Jeśli POST to usuń produkt w przeciwnym wypadku wykonaj GET.
     if request.method == 'POST':
         product_id = request.POST.get('delete_product_id')
         if product_id:
@@ -29,7 +28,7 @@ def create_product(request):
         cena = request.POST.get('cena')
         dostepny = request.POST.get('dostepny') == 'on'
 
-        if nazwa and cena:
+        if nazwa and cena and opis:
             Produkt.objects.create(
                 nazwa=nazwa,
                 opis=opis,
@@ -41,3 +40,25 @@ def create_product(request):
         else:
             messages.error(request, 'Nie udało się utworzyć produktu. Sprawdź, czy wszystkie dane są wypełnione.')
     return render(request, 'main/new.html')
+
+def edit_product(request, product_id):
+    produkt = get_object_or_404(Produkt, id=product_id)
+    
+    if request.method == 'POST':
+        nazwa = request.POST.get('nazwa')
+        opis = request.POST.get('opis')
+        cena = request.POST.get('cena')
+        dostepny = request.POST.get('dostepny') == 'on'
+
+        if nazwa and cena:
+            produkt.nazwa = nazwa
+            produkt.opis = opis
+            produkt.cena = cena
+            produkt.dostepny = dostepny
+            produkt.save()
+            messages.success(request, f'Produkt "{produkt.nazwa}" został pomyślnie zaktualizowany!')
+            return redirect('wszystkie_produkty')
+        else:
+            messages.error(request, 'Nie udało się zaktualizować produktu. Sprawdź, czy wszystkie dane są wypełnione.')
+    
+    return render(request, 'main/edit.html', {'produkt': produkt})

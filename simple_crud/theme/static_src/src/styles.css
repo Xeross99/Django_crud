@@ -29,4 +29,10 @@
   .notification-fade-out {
     animation: fadeOut 4s ease-in-out;
   }
+
+  .rubik-glitch-regular {
+    font-family: "Rubik Glitch", system-ui;
+    font-weight: 400;
+    font-style: normal;
+  }
 } 
