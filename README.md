@@ -9,12 +9,17 @@
 . .venv/bin/activate
 ```
 
-2. Start the development server
+2. Install dependencies
+```
+pip install -r requirements.txt
+```
+
+3. Start the development server
 ```
 python manage.py runserver
 ```
 
-3. Start the Tailwind CSS watcher
+4. Start the Tailwind CSS watcher (for development)
 ```
 python manage.py tailwind start
 ```
