@@ -4,22 +4,27 @@
 
 ## Getting Started
 
-1. Activate the virtual environment (venv)
+1. Create the virtual environment
+```
+python3 -m venv .venv
+```
+
+2. Activate the virtual environment
 ```
 . .venv/bin/activate
 ```
 
-2. Install dependencies
+3. Install dependencies
 ```
 pip install -r requirements.txt
 ```
 
-3. Start the development server
+4. Start the development server
 ```
-python manage.py runserver
+python3 manage.py runserver
 ```
 
-4. Start the Tailwind CSS watcher (for development)
+5. Start the Tailwind CSS watcher (for development)
 ```
-python manage.py tailwind start
+python3 manage.py tailwind start
 ```
